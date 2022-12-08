@@ -13,7 +13,7 @@ a {
 }
 
 img {
-    max-width: 100%;
+    width: 100%;
     display: block;
     border-radius: 5px;
 }
@@ -221,6 +221,7 @@ body {
     grid-area: announcements;
     background: #fafbfc;
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     align-content: start;
     padding: 30px;
     gap: 30px;
@@ -237,3 +238,104 @@ body {
     padding: 30px;
 }
 
+@media screen and (max-width: 1200px){
+    .structure {
+        grid-template-columns: minmax(160px, 1fr) 3fr;
+        grid-template-areas:
+            "header header"
+            "sidenav content"
+            "sidenav announcements"
+            "footer footer"
+        ;
+    }
+
+    /*
+    .announcements {
+        grid-template-columns: 1fr 1fr;
+    }
+    */
+}
+
+@keyframes seta {
+    from {
+        right: 30px;
+    }
+    to {
+        right: 20px;
+    }
+}
+
+@media screen and (max-width: 760px){
+    .header {
+        grid-template-columns: 1fr;
+    }
+
+    .header ul{
+        margin-top: 20px;
+    }
+
+    .header li a{
+        font-size: 0.9em;
+    }
+
+    .structure {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "sidenav"
+            "content"
+            "announcements"
+            "footer"
+        ;
+    }
+
+    .sidenav {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        position: relative;
+    }
+
+    .sidenav::after {
+        content: "→";
+        position: absolute;
+        top: 5px;
+        right: 30px;
+        color: rgba(0,0,0,0.3);
+        animation: seta 0.5s ease-in 0s infinite alternate;
+    }
+
+    .sidenav ul {
+        display: flex;
+        gap: 30px;
+    }
+
+    .sidenav ul li {
+        flex: 1 0 60px;
+    }
+
+    .sidenav ul li:last-child a {
+        margin-right: 30px;
+    }
+
+    .sidenav ul li a {
+        margin: 0;
+    }
+
+    .sidenav ul li a img {
+        min-width: 60px;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .content {
+        grid-template-columns: auto;
+    }
+
+    /*
+    .announcements {
+        grid-template-columns: auto;
+    }
+    */
+}
